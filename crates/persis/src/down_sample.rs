@@ -16,7 +16,7 @@ impl Default for DownSampleParams {
     fn default() -> Self {
         let end_time = Utc::now().timestamp();
         Self {
-            time_formater: "%Y-%m-%dT%H:%M:%SZ".to_string(), //ISO 8601格式
+            time_formater: "%Y-%m-%dT%H:%M:%SZ".to_string(), // ISO 8601 format
             table_name: "memory_battery_status".to_string(),
             time_field: "timestamp".to_string(),
             order_field: "id".to_string(),
@@ -54,7 +54,7 @@ UniqueBatteryStatus AS (
 SELECT
     {time_field},
     state,
-    ROW_NUMBER() OVER (PARTITION BY {time_field} ORDER BY {order_field} DESC) AS rn --排序字段用于在分组内的数据排序
+    ROW_NUMBER() OVER (PARTITION BY {time_field} ORDER BY {order_field} DESC) AS rn -- Ordering field used to sort data within groups
 FROM
     {table_name}
 WHERE {time_field}>{start_time} and {time_field}<={end_time}

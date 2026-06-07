@@ -20,16 +20,16 @@ fn generate_tray_icon(
     let height = 64;
     let mut img = ImageBuffer::new(width, height);
 
-    // 设置透明背景
+    // set transparent background
     for pixel in img.pixels_mut() {
         *pixel = Rgba([0, 0, 0, 0]);
     }
 
-    // 加载字体
+    // load font
     let font_data = include_bytes!("../assets/fonts/Roboto-Bold.ttf");
     let font = Font::try_from_bytes(font_data as &[u8]).unwrap();
 
-    // 配置字体大小
+    // configure font size
     let scale = if number >= 100 {
         Scale { x: 38.0, y: 38.0 }
     } else {
@@ -37,7 +37,7 @@ fn generate_tray_icon(
     };
     let text = format!("{}", number);
 
-    // 计算文本位置
+    // calculate text position
     let width_in_pixels = font
         .layout(&text, scale, rusttype::point(0.0, 0.0))
         .map(|g| g.pixel_bounding_box().unwrap().width())
@@ -67,7 +67,7 @@ fn generate_tray_icon(
         }
     }
 
-    // 将图像转换为 PNG 字节流
+    // convert image to PNG bytes
     let mut buffer = Vec::new();
     image::codecs::png::PngEncoder::new(&mut buffer).write_image(
         &img,
@@ -148,11 +148,11 @@ pub fn build(app: &App, id: &str) {
             }
             "admin" => {
                 let state = app.state::<Arc<Mutex<session::SessionState>>>();
-                // 将 state 转移到异步任务中
+                // move state into async task
                 tokio::spawn({
-                    let state = Arc::clone(&state); // 克隆 Arc 以便传递给异步任务
+                    let state = Arc::clone(&state); // clone Arc to pass to async task
                     async move {
-                        let state = state.lock().await; // 异步地获取 Mutex 锁
+                        let state = state.lock().await; // acquire Mutex lock asynchronously
                         if !state.is_admin {
                             windows::elevate_self();
                         }
@@ -173,8 +173,8 @@ pub fn build(app: &App, id: &str) {
                 tokio::spawn({
                     let state = Arc::clone(&state);
                     async move {
-                        let mut state = state.lock().await; // 异步地获取 Mutex 锁
-                        state.is_min_tray = false; // 修改状态
+                        let mut state = state.lock().await; // acquire Mutex lock asynchronously
+                        state.is_min_tray = false; // modify state
                     }
                 });
             }

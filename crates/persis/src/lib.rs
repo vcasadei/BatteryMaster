@@ -57,7 +57,7 @@ mod tests {
             battery.last();
             let system = system::Status::build().unwrap();
             let res = store.insert(&battery, &system, |_| async {}).await;
-            //在系统进入休眠或睡眠瞬间，insert会Err，需要处理
+            // During system suspend/sleep, insert may Err; handle this case
             match res {
                 Ok((_vec,inner)) => {
                     inner.map(|x| {

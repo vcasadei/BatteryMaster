@@ -28,7 +28,7 @@ pub fn run() {
         } else {
             "Unknown panic payload"
         };
-        // 提取位置信息
+        // extract location information
         let location = info
             .location()
             .map(|loc| format!("{}:{}:{}", loc.file(), loc.line(), loc.column()))
@@ -39,7 +39,7 @@ pub fn run() {
             message,
             location
         );
-        std::process::exit(1); // 可以替换为你希望的退出代码
+        std::process::exit(1); // replace with desired exit code
     }));
     tauri::Builder::default()
         .plugin(tauri_plugin_clipboard_manager::init())
@@ -62,8 +62,8 @@ pub fn run() {
             tokio::spawn({
                 let state = Arc::clone(&state);
                 async move {
-                    let mut state = state.lock().await; // 异步地获取 Mutex 锁
-                    state.is_min_tray = false; // 修改状态
+                    let mut state = state.lock().await; // acquire Mutex lock asynchronously
+                    state.is_min_tray = false; // modify state
                 }
             });
         }))
@@ -92,7 +92,7 @@ pub fn run() {
             let (tx, rx) = oneshot::channel::<()>();
             //service update.
             tokio::spawn(async move {
-                let mut tx = Some(tx); // 将 tx 包装成 Option，以便在第一次发送后取出
+                let mut tx = Some(tx); // wrap tx into Option so it can be taken after first send
                 loop {
                     let mut secs = 1;
                     {
@@ -159,7 +159,7 @@ pub fn run() {
                             let res = manager
                                 .insert_battery(&battery, &system, |_| async {
                                     log!(Level::Warn, "new battery history ");
-                                    /*绝对不能在lock中再次lock，会导致死锁
+                                    /* Never lock again inside a lock — this would cause deadlock
                                     let state =
                                         handler1.state::<Arc<Mutex<session::SessionState>>>();
                                     let state = state.lock().await;
@@ -276,10 +276,10 @@ pub fn run() {
                 let state: tauri::State<'_, Arc<Mutex<session::SessionState>>> =
                     handler.state::<Arc<Mutex<session::SessionState>>>();
                 tokio::spawn({
-                    let state = Arc::clone(&state); // 克隆 Arc 以便传递给异步任务
+                    let state = Arc::clone(&state); // clone Arc to pass to async task
                     async move {
-                        let mut state = state.lock().await; // 异步地获取 Mutex 锁
-                        state.is_min_tray = true; // 修改状态
+                        let mut state = state.lock().await; // acquire Mutex lock asynchronously
+                        state.is_min_tray = true; // modify state
                     }
                 });
             }

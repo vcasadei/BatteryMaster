@@ -1,21 +1,21 @@
 <template>
   <q-page class="q-pa-none">
     <q-tabs v-model="tab" dense class="text-grey" active-color="white">
-      <q-tab name="full" label="满电" />
-      <q-tab name="discharging" label="放电中" />
-      <q-tab name="charging" label="充电中" />
-      <q-tab name="empty" label="告急" />
+      <q-tab name="full" label="Full" />
+      <q-tab name="discharging" label="Discharging" />
+      <q-tab name="charging" label="Charging" />
+      <q-tab name="empty" label="Critical" />
     </q-tabs>
     <div class="row">
       <div class="col">
         <PercentageGauge
-          name="CPU使用率"
+          name="CPU Usage"
           :value="Number((system_store.cpuload * 100).toFixed(1))"
         />
       </div>
       <div class="col">
         <PercentageGauge
-          name="内存占用"
+          name="Memory Usage"
           :value="
             Number(
               (
@@ -29,7 +29,7 @@
       </div>
       <div class="col">
         <PercentageGauge
-          name="电量"
+          name="Charge"
           :value="Number((battery_store.percentage! * 100).toFixed(1))"
           unit="%"
         />
@@ -40,21 +40,21 @@
         <div class="row">
           <div class="col">
             <PercentageGauge
-              name="电池寿命"
+              name="Battery Health"
               :value="Number((battery_store.state_of_health! * 100).toFixed(1))"
             />
           </div>
 
           <div class="col">
             <PercentageGauge
-              name="满充容量"
+              name="Full Capacity"
               :value="Number(battery_store.full_capacity!.toFixed(1))"
               unit="wh"
             />
           </div>
           <div class="col">
             <PercentageGauge
-              name="设计容量"
+              name="Design Capacity"
               :value="Number(battery_store.design_capacity!.toFixed(1))"
               unit="wh"
             />
@@ -65,21 +65,21 @@
         <div class="row">
           <div class="col">
             <PercentageGauge
-              name="充放电功率"
+              name="Charge/Discharge Power"
               :value="Number(battery_store.energy_rate.toFixed(1))"
               unit="w"
             />
           </div>
           <div class="col">
             <PercentageGauge
-              name="电池电压"
+              name="Battery Voltage"
               :value="Number(battery_store.voltage.toFixed(1))"
               unit="v"
             />
           </div>
           <div class="col">
             <PercentageGauge
-              name="当前容量"
+              name="Current Capacity"
               :value="Number(battery_store.capacity!.toFixed(1))"
               unit="wh"
             />
@@ -90,21 +90,21 @@
         <div class="row">
           <div class="col">
             <PercentageGauge
-              name="充放电功率"
+              name="Charge/Discharge Power"
               :value="Number(battery_store.energy_rate.toFixed(1))"
               unit="w"
             />
           </div>
           <div class="col">
             <PercentageGauge
-              name="电池电压"
+              name="Battery Voltage"
               :value="Number(battery_store.voltage.toFixed(1))"
               unit="v"
             />
           </div>
           <div class="col">
             <PercentageGauge
-              name="当前容量"
+              name="Current Capacity"
               :value="Number(battery_store.capacity!.toFixed(1))"
               unit="wh"
             />

@@ -2,7 +2,7 @@
 
 import { createApp } from "vue";
 import { Quasar, Notify, Dialog } from "quasar";
-import quasarLang from "quasar/lang/zh-CN";
+import quasarLang from "quasar/lang/en-US";
 import router from "./router";
 import { createPinia } from "pinia";
 
@@ -17,9 +17,9 @@ import "quasar/src/css/index.sass";
 // and placed in same folder as main.js
 import App from "./App.vue";
 
-import { zhCN } from "date-fns/locale";
+import { enUS } from "date-fns/locale";
 import { setDefaultOptions } from "date-fns";
-setDefaultOptions({ locale: zhCN });
+setDefaultOptions({ locale: enUS });
 
 const myApp = createApp(App);
 

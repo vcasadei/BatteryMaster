@@ -51,11 +51,11 @@ impl std::fmt::Display for State {
 }
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 struct Identifier {
-    //供应商
+    // vendor
     pub vendor: Option<String>,
-    //模式
+    // model
     pub model: Option<String>,
-    //序列号
+    // serial number
     pub serial_number: Option<String>,
 }
 impl Default for Identifier {
@@ -69,37 +69,37 @@ impl Default for Identifier {
 }
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub struct Status {
-    // 基于上次更新，电池信息是否已经更改
+    // Whether battery info changed since last update
     pub state_changed: bool,
-    //额外的标识信息
+    // additional identifier info
     identifier: Identifier,
-    //序号
+    // index
     index: u16,
-    //时间戳
+    // timestamp
     pub timestamp: i64,
-    //状态
+    // state
     pub state: State,
-    //温度
+    // temperature
     pub temperature: Option<f32>,
-    //循环次数
+    // cycle count
     pub cycle_count: Option<u32>,
-    //电量百分比
+    // percentage
     pub percentage: f32,
-    //充放电瓦数
+    // energy rate (charge/discharge watts)
     pub energy_rate: f32,
-    //电池电压
+    // voltage
     pub voltage: f32,
-    //电池健康状态
+    // state of health
     pub state_of_health: f32,
-    //设计容量
+    // design capacity
     pub design_capacity: f32,
-    //满充容量
+    // full charge capacity
     pub full_capacity: f32,
-    //当前容量
+    // current capacity
     pub capacity: f32,
-    //预估放电时长
+    // estimated seconds to empty
     pub time_to_empty_secs: u64,
-    //预估充满电时长
+    // estimated seconds to full
     pub time_to_full_secs: u64,
 }
 impl<'a> Default for Status {

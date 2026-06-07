@@ -13,12 +13,12 @@
           indicator-color="transparent"
           align="left"
         >
-          <q-route-tab name="monitor" label="监控" to="/monitor" exact />
+          <q-route-tab name="monitor" label="Monitor" to="/monitor" exact />
 
-          <q-route-tab name="history" label="健康度" to="/history" exact />
+          <q-route-tab name="history" label="Health" to="/history" exact />
 
-          <q-route-tab name="cpupower" label="功耗" to="/cpupower" exact />
-          <q-route-tab name="setting" label="设置" to="/setting" exact />
+          <q-route-tab name="cpupower" label="Power" to="/cpupower" exact />
+          <q-route-tab name="setting" label="Settings" to="/setting" exact />
         </q-tabs>
         <q-space />
         <q-chip square :color="state_color" size="sm" class="text-white">

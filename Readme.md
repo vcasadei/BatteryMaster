@@ -16,6 +16,10 @@ Tauri relies on the VC runtime library and WebView runtime. The latest version o
 
 # History
 
+## 0.1.4
+
+English Translation.
+
 ## 0.1.3
 
 Add a historical record function for laptop battery usage to track changes in battery health, charge/discharge status, charge/discharge power, and battery wear; while also updating the monitoring page.

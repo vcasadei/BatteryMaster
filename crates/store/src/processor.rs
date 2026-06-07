@@ -129,11 +129,11 @@ impl DataProcessor {
                 .clone()
                 .lazy()
                 .with_columns(vec![
-                    // 创建一列标识当前行的状态变化
-                    col("state").shift(lit(1)).alias("prev_state"), // 获取上一行的状态
-                ])
-                .filter(
-                    // 在每个时间窗口内，检查状态是否变化
+                        // Create a column to identify state changes in the current row
+                        col("state").shift(lit(1)).alias("prev_state"), // get the previous row's state
+                    ]),
+                    .filter(
+                        // Within each time window, check if state has changed
                     col("state")
                         .neq(col("prev_state"))
                         .or(col("prev_state").is_null()),

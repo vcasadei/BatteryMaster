@@ -4,9 +4,9 @@
       <q-list bordered padding class="text-grey-3">
         <q-item tag="label" v-ripple>
           <q-item-section>
-            <q-item-label>自动启动</q-item-label>
+            <q-item-label>Auto start</q-item-label>
             <q-item-label caption class="text-grey-5"
-              >随操作系统一同启动</q-item-label
+              >Start with the operating system</q-item-label
             >
           </q-item-section>
           <q-item-section side top>
@@ -15,9 +15,9 @@
         </q-item>
         <q-item tag="label" v-ripple>
           <q-item-section>
-            <q-item-label>最小化启动</q-item-label>
+            <q-item-label>Start minimized</q-item-label>
             <q-item-label caption class="text-grey-5"
-              >启动时最小化到任务栏</q-item-label
+              >Minimize to taskbar on startup</q-item-label
             >
           </q-item-section>
           <q-item-section side top>
@@ -28,9 +28,9 @@
 
         <q-item tag="label" v-ripple>
           <q-item-section>
-            <q-item-label>记录历史</q-item-label>
+            <q-item-label>Record history</q-item-label>
             <q-item-label caption class="text-grey-5"
-              >记录电池消耗历史</q-item-label
+              >Record battery consumption history</q-item-label
             >
           </q-item-section>
           <q-item-section side top>
@@ -39,7 +39,7 @@
         </q-item>
         <q-separator spaced />
 
-        <q-item-label header class="text-grey-3">后台更新间隔</q-item-label>
+        <q-item-label header class="text-grey-3">Background update interval</q-item-label>
         <q-item>
           <q-item-section side>
             <q-icon color="primary" name="schedule" size="md" />
@@ -54,7 +54,7 @@
             />
           </q-item-section>
         </q-item>
-        <q-item-label header class="text-grey-3">界面更新间隔</q-item-label>
+        <q-item-label header class="text-grey-3">UI update interval</q-item-label>
         <q-item>
           <q-item-section side>
             <q-icon color="primary" name="schedule" size="md" />
@@ -74,7 +74,7 @@
           <q-item-section>
             <q-btn
               color="grey"
-              label="放弃"
+              label="Discard"
               icon="restart_alt"
               :loading="loading"
               @click="reset"
@@ -83,7 +83,7 @@
           <q-item-section>
             <q-btn
               color="primary"
-              label="保存"
+              label="Save"
               icon="save"
               :loading="loading"
               @click="onSubmit"
@@ -104,11 +104,11 @@ const form_value = ref(config_store.$state);
 const loading = ref(false);
 const onSubmit = async () => {
   loading.value = true;
-  try {
+    try {
     await config_store.update(form_value.value);
-    $q.dialog({ message: `保存完成` });
+    $q.dialog({ message: `Save completed` });
   } catch (err) {
-    $q.dialog({ message: `保存出错，错误信息:${err}` });
+    $q.dialog({ message: `Save failed, error: ${err}` });
   }
   loading.value = false;
 };

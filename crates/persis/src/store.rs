@@ -79,7 +79,7 @@ impl BatteryStore {
                 .to_string()
                 .contains("no such table: memory_battery_status")
             {
-                //时间长了会出现这个错误，不理解为什么，故丢弃数据，重置这个数据库连接
+                // This error can occur after a long uptime; unclear why. Discard the data and reset the in-memory DB connection
                 self.mem_db = Database::connect(String::from("sqlite::memory:")).await?;
                 Migrator::up(&self.mem_db, None).await?;
                 model = status.insert(&self.mem_db).await;

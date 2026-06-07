@@ -52,25 +52,25 @@ impl<'de> Deserialize<'de> for SerializableState {
 #[derive(Clone, Serialize, Deserialize, Debug)]
 pub struct BatteryInfo {
     pub state_changed: bool,
-    //时间戳
+    // timestamp
     pub timestamp: i64,
-    //状态
+    // state
     pub state: SerializableState,
-    //电量百分比
+    // percentage
     pub percentage: f32,
-    //充放电瓦数
+    // energy rate (W)
     pub energy_rate: f32,
-    //电池电压
+    // voltage
     pub voltage: f32,
-    //电池健康状态
+    // state of health
     pub state_of_health: f32,
-    //设计容量
+    // design capacity
     pub design_capacity: f32,
-    //满充容量
+    // full capacity
     pub full_capacity: f32,
-    //当前容量
+    // current capacity
     pub capacity: f32,
-    //cpu使用率
+    // CPU usage
     pub cpu_load: f32,
 
     pub serial_number: String,
@@ -182,7 +182,7 @@ impl Battery {
             .to_string();
         let mut record = BatteryInfo::default();
 
-        //查询电池数量
+        // query number of batteries
         let batteries = bms.batteries().unwrap();
         for battery in batteries {
             let battery = battery.unwrap();

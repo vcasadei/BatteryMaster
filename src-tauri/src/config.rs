@@ -16,14 +16,14 @@ fn check_if_dev() -> bool {
     false
 }
 
-// 定义配置结构体
+// Define configuration struct
 #[derive(Serialize, Deserialize, Clone, Copy)]
 pub struct Config {
-    pub auto_start: bool,             // 系统启动时自动启动
-    pub start_minimize: bool,         //启动时最小化
-    pub ui_update: u8,                // UI标更新时间
-    pub service_update: u8,           // 监控服务更新时间
-    pub record_battery_history: bool, // 是否记录电池活动历史
+    pub auto_start: bool,             // Start with the system
+    pub start_minimize: bool,         // Start minimized
+    pub ui_update: u8,                // UI update interval
+    pub service_update: u8,           // Monitoring service update interval
+    pub record_battery_history: bool, // Whether to record battery activity history
 }
 
 impl Default for Config {
@@ -38,7 +38,7 @@ impl Default for Config {
     }
 }
 
-// 获取当前执行目录
+// Get current executable directory
 pub fn get_exe_directory() -> PathBuf {
     env::current_exe()
         .expect("Failed to get current executable path")
@@ -47,22 +47,22 @@ pub fn get_exe_directory() -> PathBuf {
         .to_path_buf()
 }
 
-// 获取配置文件路径（基于执行文件目录）
+// Get config file path (based on executable directory)
 pub fn get_config_file_path() -> PathBuf {
     get_exe_directory().join("config.json")
 }
 
-// 读取配置文件并返回配置
+// Read configuration file and return Config
 pub fn load_config() -> Result<Config, Box<dyn std::error::Error>> {
     let config_path = get_config_file_path();
 
     if Path::new(&config_path).exists() {
-        // 文件存在，读取并解析配置
+        // File exists: read and parse configuration
         let mut file = File::open(config_path)?;
         let mut contents = String::new();
         file.read_to_string(&mut contents)?;
 
-        // 解析 JSON 配置
+        // Parse JSON configuration
         let config: Config = serde_json::from_str(&contents)?;
         Ok(config)
     } else {
@@ -72,12 +72,12 @@ pub fn load_config() -> Result<Config, Box<dyn std::error::Error>> {
     }
 }
 
-// 保存配置到文件
+// Save configuration to file
 pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     let config_path = get_config_file_path();
     let mut file = File::create(config_path)?;
 
-    // 将配置序列化为 JSON
+    // Serialize configuration to JSON
     let config_json = serde_json::to_string_pretty(config)?;
     file.write_all(config_json.as_bytes())?;
 

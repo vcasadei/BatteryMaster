@@ -6,13 +6,13 @@
       class="text-white bg-warning"
       v-show="!config_store.record_battery_history"
     >
-      在设置中打开记录历史功能方可跟踪电池健康度；
+      Enable record history in Settings to track battery health;
       <template v-slot:action>
         <q-btn
           size="sm"
           flat
           color="white"
-          label="去设置"
+          label="Go to Settings"
           icon="settings"
           to="/setting"
         />
@@ -68,12 +68,12 @@
                 }}{{ (row.percentage * 100).toFixed(0) }}%
               </q-item-label>
               <q-item-label caption
-                >CPU占用{{ (row.cpu_load * 100).toFixed(1) }}%</q-item-label
+                >CPU Usage {{ (row.cpu_load * 100).toFixed(1) }}%</q-item-label
               >
             </q-item-section>
             <q-item-section
               ><q-item-label caption
-                >开始于
+                >Started at
                 {{ format(row.timestamp * 1000, "MM-dd HH:mm") }}</q-item-label
               ><q-item-label class="text-h6"
                 ><span :class="state_color(row.state)">
@@ -86,7 +86,7 @@
                   }}</span
                 ></q-item-label
               ><q-item-label caption
-                >健康度{{
+                >Health{{
                   (row.state_of_health * 100).toFixed(1)
                 }}%</q-item-label
               >
@@ -145,10 +145,10 @@ const config_store = useConfig();
 const battery_store = useBatteryInfo();
 const history_sotre = useHistory();
 const state_text = (state: string) => {
-  if (state == "full") return "满电";
-  else if (state == "charging") return "充电";
-  else if (state == "discharging") return "放电";
-  else if (state == "empty") return "告急";
+  if (state == "full") return "Full";
+  else if (state == "charging") return "Charging";
+  else if (state == "discharging") return "Discharging";
+  else if (state == "empty") return "Critical";
 };
 const state_color = (state: string) => {
   if (state == "full") return "text-grey";

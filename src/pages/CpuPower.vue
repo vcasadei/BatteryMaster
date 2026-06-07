@@ -7,13 +7,13 @@
             <q-item-section
               ><q-item-label class="text-h6">Warning</q-item-label>
               <q-item-label caption
-                >您设置的功率限制部分没有生效，可能是因为计算机未支持部分设置，也有可能是我们不支持您的计算机；稍后谨慎进行功率限制，最好不要使用锁定功能；</q-item-label
+                >Some of the power limits you set did not take effect. This may be because your machine does not support certain settings, or we do not support your hardware. Apply power limits with caution; avoid using the lock feature if unsure.</q-item-label
               ></q-item-section
             >
           </q-item>
           <q-item dense
             ><q-item-section
-              >下面是设置功率后实际查询到的值</q-item-section
+              >Actual queried values after applying the power settings</q-item-section
             ></q-item
           >
           <q-item dense>
@@ -31,8 +31,8 @@
             <q-item-section side> {{ set_result.fast_limit }}w</q-item-section>
           </q-item>
         </q-list>
-        <q-card-actions align="right">
-          <q-btn flat @click="warn_dialog = false">关闭</q-btn>
+          <q-card-actions align="right">
+          <q-btn flat @click="warn_dialog = false">Close</q-btn>
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -42,15 +42,14 @@
       class="text-white bg-red"
       v-show="!power_store.isAdmin"
     >
-      需要以管理员模式启动
+      Requires administrative privileges
       <template v-slot:action>
         <q-btn
           size="sm"
           flat
           color="white"
-          label="管理员模式"
+          label="Run as Admin"
           icon="restart_alt"
-          @click="exec_elevate_self"
         />
       </template>
     </q-banner>
@@ -58,8 +57,8 @@
       dense
       class="text-white bg-warning"
       v-show="sys_store.support_power_set && power_store.isAdmin"
-      >该功能仅在支持的amd
-      cpu(zen2+)上可用，也可能破坏您的计算机硬件,请谨慎使用；{{
+      >This feature is only supported on AMD CPUs (Zen2+). It may damage hardware; use with caution.
+    
     }}</q-banner>
 
     <q-form @submit="onSubmit" :loading="loading">
@@ -97,10 +96,10 @@
               label-always
               :disable="setting_disabled"
             /><q-item-label class="text-light-green text-h6"
-              >长时功耗(w)</q-item-label
+                >Long-term power (W)</q-item-label
             >
-            <q-item-label class="text-grey" caption
-              >在没有触碰温度墙或其他因素，CPU可以长时间维持的最大功率限制；</q-item-label
+              <q-item-label class="text-grey" caption
+                >Maximum sustained power limit without hitting thermal walls or other factors;</q-item-label
             >
           </q-item-section>
           <q-item-section side>
@@ -137,10 +136,10 @@
               label-always
               :disable="setting_disabled"
             /><q-item-label class="text-light-green text-h6"
-              >短时功耗(w)</q-item-label
+                >Short-term power (W)</q-item-label
             >
-            <q-item-label class="text-grey" caption
-              >CPU可以短时间维持的最大功率限制</q-item-label
+              <q-item-label class="text-grey" caption
+                >Maximum power the CPU can sustain for a short period</q-item-label
             >
           </q-item-section>
           <q-item-section side>
@@ -177,10 +176,10 @@
               label-always
               :disable="setting_disabled"
             /><q-item-label class="text-light-green text-h6"
-              >瞬时功耗(w)</q-item-label
+                >Instantaneous power (W)</q-item-label
             >
-            <q-item-label class="text-grey" caption
-              >CPU在瞬间能达到的最高功率限制</q-item-label
+              <q-item-label class="text-grey" caption
+                >Peak instantaneous power the CPU can reach</q-item-label
             >
           </q-item-section>
           <q-item-section side>
@@ -197,9 +196,9 @@
         </q-item>
         <q-item tag="label" v-ripple>
           <q-item-section>
-            <q-item-label class="text-white">自动锁定</q-item-label>
+            <q-item-label class="text-white">Auto Lock</q-item-label>
             <q-item-label caption class="text-grey-5"
-              >可能有其他进程重新设置功率限制，锁定后将每隔10秒恢复到设置的值。</q-item-label
+                >Other processes may reset power limits. When locked, values are restored every 10 seconds.</q-item-label
             >
           </q-item-section>
           <q-item-section side top>
@@ -214,7 +213,7 @@
           <q-item-section>
             <q-btn
               color="grey"
-              label="恢复"
+              label="Restore"
               icon="restart_alt"
               :loading="loading"
               @click="onReset"
@@ -227,7 +226,7 @@
                   <q-item dense>
                     <q-item-section>
                       <q-item-label
-                        >即将恢复到如下设置</q-item-label
+                        >Will be reset to the following settings</q-item-label
                       ></q-item-section
                     >
                   </q-item>
@@ -262,7 +261,7 @@
           <q-item-section>
             <q-btn
               color="primary"
-              label="设置"
+              label="Apply"
               icon="save"
               :loading="loading"
               :disable="btn_disabled || !can_submit || form_value.auto_lock"

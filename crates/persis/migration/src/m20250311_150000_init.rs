@@ -46,7 +46,7 @@ impl MigrationTrait for Migration {
                     .if_not_exists()
                     .col(big_integer(BatteryStateHistory::Timestamp).primary_key())
                     .col(string(BatteryStateHistory::State))
-                    .col(ColumnDef::new(BatteryStateHistory::Prev).string().null())//这么写才能定义null
+                    .col(ColumnDef::new(BatteryStateHistory::Prev).string().null())// Use .null() to define a nullable column
                     .col(ColumnDef::new(BatteryStateHistory::EndAt).big_integer().null())
                     .col(float(BatteryStateHistory::Capacity))
                     .col(float(BatteryStateHistory::FullCapacity))

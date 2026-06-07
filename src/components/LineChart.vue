@@ -51,7 +51,7 @@ option = {
         data: [
           [
             {
-              name: "放电",
+              name: "Discharging",
               xAxis: "2025-1-3",
               itemStyle: {
                 color: "rgba(255, 127, 127, 0.2)",
@@ -63,7 +63,7 @@ option = {
           ],
           [
             {
-              name: "满电",
+              name: "Full",
               xAxis: "2025-1-5",
               itemStyle: {
                 color: "rgba(0, 127, 127, 0.2)",

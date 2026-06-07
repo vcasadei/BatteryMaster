@@ -23,19 +23,19 @@ impl Default for Identifier {
 
 #[derive(Clone, Serialize, Deserialize, Debug, PartialEq)]
 pub struct Status {
-    //额外的标识信息
+    // additional identifier info
     identifier: Identifier,
-    //时间戳
+    // timestamp
     pub timestamp: i64,
-    //是否支持cpu功耗限制
+    // whether CPU power limiting is supported
     pub support_power_set: bool,
-    //cpu占用
+    // CPU load
     pub cpuload: f32,
-    //空闲内存
+    // free memory
     pub memfree: u32,
-    //屏幕亮度
+    // screen brightness
     //pub screen_brightness: f32,
-    //屏幕标识
+    // screen instance identifier
     //pub screen_instance: String,
 }
 

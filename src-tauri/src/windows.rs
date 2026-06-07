@@ -24,14 +24,14 @@ pub fn is_admin() -> bool {
             &mut size,
         );
 
-        CloseHandle(token); // 必须关闭句柄
+        CloseHandle(token); // must close handle
         status != 0 && elevation.TokenIsElevated != 0
     }
 }
 
 #[cfg(not(windows))]
 pub fn is_admin() -> bool {
-    false // 非Windows系统返回false
+    false // non-Windows systems return false
 }
 #[cfg(windows)]
 pub fn elevate_self() {
@@ -40,7 +40,7 @@ pub fn elevate_self() {
     use winapi::um::shellapi::ShellExecuteW;
     use winapi::um::winuser::SW_SHOW;
 
-    let exe_path = std::env::current_exe().expect("获取程序路径失败");
+    let exe_path = std::env::current_exe().expect("Failed to get executable path");
     let os_str = exe_path
         .as_os_str()
         .encode_wide()
@@ -48,9 +48,9 @@ pub fn elevate_self() {
         .collect::<Vec<u16>>();
 
     let verb: Vec<u16> = "runas\0".encode_utf16().collect();
-    // 获取当前的命令行参数，并将 `--adminstart` 加入其中
-    let mut params = std::env::args().skip(1).collect::<Vec<_>>(); // 获取原有的命令行参数
-    params.push("--adminstart".to_string()); // 添加 `--adminstart` 参数
+    // Get current command-line arguments and append `--adminstart`
+    let mut params = std::env::args().skip(1).collect::<Vec<_>>(); // get existing command-line arguments
+    params.push("--adminstart".to_string()); // add `--adminstart` parameter
 
     let params_str = params
         .join(" ")
