@@ -74,6 +74,8 @@ pub fn run() {
         .setup(move |app| {
             log!(Level::Info, "args ={:?}", args);
             let config = config::load_config().expect("load_config err.");
+            // Ensure runtime files exist (config.json is created by load_config())
+            config::ensure_runtime_files().expect("ensure runtime files err.");
             let session = session::SessionState::new(config);
             app.manage(Arc::new(Mutex::new(session)));
             if is_adminstart {

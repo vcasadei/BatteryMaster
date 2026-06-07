@@ -27,7 +27,16 @@
   },
   "bundle": {
     "active": true,
-    "targets": [],
+    "targets": ["nsis"],
+    "resources": [
+      "history.db",
+      "logs.log",
+      "config.json",
+      "inpoutx64.dll",
+      "libryzenadj.dll",
+      "WinRing0x64.dll",
+      "WinRing0x64.sys"
+    ],
     "icon": ["icons/icon.ico"]
   }
 }

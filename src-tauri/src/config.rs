@@ -84,6 +84,27 @@ pub fn save_config(config: &Config) -> Result<(), Box<dyn std::error::Error>> {
     Ok(())
 }
 
+// Ensure runtime files exist: history DB and logs file.
+pub fn ensure_runtime_files() -> Result<(), Box<dyn std::error::Error>> {
+    let exe_dir = get_exe_directory();
+    // Ensure directory exists (should normally exist)
+    if !exe_dir.exists() {
+        std::fs::create_dir_all(&exe_dir)?;
+    }
+
+    let history_path = exe_dir.join("history.db");
+    if !history_path.exists() {
+        let _ = File::create(&history_path)?;
+    }
+
+    let logs_path = exe_dir.join("logs.log");
+    if !logs_path.exists() {
+        let _ = File::create(&logs_path)?;
+    }
+
+    Ok(())
+}
+
 pub fn set_autostart(app_handle: &tauri::AppHandle, val: bool) {
     let autostart_manager = app_handle.autolaunch();
     if !check_if_dev() {
