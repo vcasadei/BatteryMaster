@@ -63,7 +63,7 @@
               <q-item-label class="text-h6"
                 >{{
                   row.state != "full"
-                    ? `${row.prev_percentage != null ? (row.prev_percentage * 100).toFixed(0) : "nan"}-`
+                    ? `${row.prev_percentage != null ? (row.prev_percentage * 100).toFixed(0) : "N/A"}-`
                     : ""
                 }}{{ (row.percentage * 100).toFixed(0) }}%
               </q-item-label>
@@ -79,14 +79,16 @@
                 ><span :class="state_color(row.state)">
                   {{
                     row.state != "full"
-                      ? row.percentage_diff != null
-                        ? `${(row.percentage_diff * 100).toFixed(2)}%`
-                        : "nan"
-                      : `${row.capacity.toFixed(2)}wh`
+                        ? row.percentage_diff != null
+                          ? `${(row.percentage_diff * 100).toFixed(2)}%`
+                          : row.prev_percentage != null
+                          ? `${((row.percentage - row.prev_percentage) * 100).toFixed(2)}%`
+                          : "N/A"
+                        : `${row.capacity.toFixed(2)}wh`
                   }}</span
                 ></q-item-label
               ><q-item-label caption
-                >Health{{
+                >Health {{
                   (row.state_of_health * 100).toFixed(1)
                 }}%</q-item-label
               >
@@ -97,7 +99,9 @@
                   row.state != "full"
                     ? row.capacity_diff != null
                       ? `${row.capacity_diff.toFixed(1)}wh`
-                      : `nan`
+                      : row.prev_capacity != null
+                      ? `${(row.capacity - row.prev_capacity).toFixed(1)}wh`
+                      : "N/A"
                     : ``
                 }}</q-item-label
               >
